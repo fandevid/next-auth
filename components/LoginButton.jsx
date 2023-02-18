@@ -4,11 +4,11 @@ export default function btnLogin() {
   const { data: session } = useSession();
   // console.log("btnlogin", session.user.email);
   if (session) {
-    console.log(session.user.email);
+    // console.log(session.user.email);
     return (
       <>
         Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        <button onClick={signOut}>Sign out</button>
       </>
     );
   }

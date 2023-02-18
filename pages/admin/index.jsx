@@ -7,14 +7,15 @@ import { authOptions } from "../api/auth/[...nextauth]";
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  console.log(session);
   return {
-    props: { session },
+    props: { user: session?.user ?? null },
   };
 }
 
-const admin = ({ session }) => {
+const admin = ({ user }) => {
   const router = useRouter();
-  console.log(session);
+  console.log(user);
   // if (!session)
   //   return (
   //     <div>
@@ -24,7 +25,13 @@ const admin = ({ session }) => {
   //   );
   return (
     <div className="">
-      <h1>Halaman admin : </h1>
+      <img
+        src={user?.image ?? "https://olshop.vercel.app/img/beat.jpeg"}
+        alt=""
+      />
+      <h1>Halaman admin</h1>
+
+      {user ? <h4>Welcome {user.name}</h4> : "Anda bleum Login"}
       <LoginButton />
     </div>
   );
